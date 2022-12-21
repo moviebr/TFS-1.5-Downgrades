@@ -49,7 +49,6 @@
 		<voice sentence="YOU WILL BURN!" yell="1" />
 	</voices>
 	<loot>
-		<item id="2148" name="gold coin" chance="95258" countmax="246" />
 		<item id="2672" name="dragon ham" chance="79757" />
 		<item id="2796" name="green mushroom" chance="12120" />
 		<item id="7378" name="royal spear" chance="9139" countmax="3" />

@@ -45,7 +45,6 @@
 		<voice sentence="You're no match for me!" />
 	</voices>
 	<loot>
-		<item id="2148" name="gold coin" chance="48586" countmax="143" />
 		<item id="2389" name="spear" chance="29429" countmax="3" />
 		<item id="2691" name="brown bread" chance="20600" countmax="2" />
 		<item id="2120" name="rope" chance="14426" />
