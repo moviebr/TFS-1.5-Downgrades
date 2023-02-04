@@ -169,6 +169,9 @@ void dispatchSignalHandler(int signal)
 			g_scheduler.join();
 			g_databaseTasks.join();
 			g_dispatcher.join();
+			#ifdef STATS_ENABLED
+				g_stats.join();
+			#endif
 			break;
 #endif
 		default:
