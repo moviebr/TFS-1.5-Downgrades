@@ -137,8 +137,8 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 		return;
 	}
 
-	const std::string customMessage = g_config.getString(ConfigManager::BLOCK_LOGIN_TEXT);
 	if (g_config.getBoolean(ConfigManager::BLOCK_LOGIN)) {
+		const std::string customMessage = g_config.getString(ConfigManager::BLOCK_LOGIN_TEXT);
 		disconnectClient(customMessage);
 		return;
 	}
