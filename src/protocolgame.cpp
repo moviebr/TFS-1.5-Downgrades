@@ -1357,7 +1357,7 @@ void ProtocolGame::sendSaleItemList(const std::list<ShopInfo>& shop)
 			uint64_t playerBank = player->getBankBalance();
 			msg.add<uint64_t>(playerBank + playerMoney); // deprecated and ignored by QT client. OTClient still uses it.
 		} else {
-			msg.add<uint64_t>(playerBank);
+			msg.add<uint64_t>(playerMoney);
 		}
 	} else {
 		msg.add<uint32_t>(player->getItemTypeCount(moneyType));
