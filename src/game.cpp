@@ -3613,6 +3613,18 @@ void Game::changeSpeed(Creature* creature, int32_t varSpeedDelta)
 	}
 }
 
+void Game::setCreatureSpeed(Creature* creature, int32_t speed)
+{
+	creature->setBaseSpeed(speed);
+
+	//send to clients
+	SpectatorVec spectators;
+	map.getSpectators(spectators, creature->getPosition(), false, true);
+	for (Creature* spectator : spectators) {
+		spectator->getPlayer()->sendChangeSpeed(creature, creature->getStepSpeed());
+	}
+}
+
 void Game::internalCreatureChangeOutfit(Creature* creature, const Outfit_t& outfit)
 {
 	if (!g_events->eventCreatureOnChangeOutfit(creature, outfit)) {
