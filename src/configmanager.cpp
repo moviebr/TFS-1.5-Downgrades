@@ -263,6 +263,7 @@ bool ConfigManager::load()
 	boolean[BLOCK_LOGIN] = getGlobalBoolean(L, "blockLogin", false);
 	boolean[CHECK_DUPLICATE_STORAGE_KEYS] = getGlobalBoolean(L, "checkDuplicateStorageKeys", false);
 	boolean[SHOW_PACKETS] = getGlobalBoolean(L, "showPackets", false);
+	boolean[PACKET_COMPRESSION] = getGlobalBoolean(L, "packetCompression", true);
 
 	string[DEFAULT_PRIORITY] = getGlobalString(L, "defaultPriority", "high");
 	string[SERVER_NAME] = getGlobalString(L, "serverName", "");
