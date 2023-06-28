@@ -316,3 +316,11 @@ function Player.isPromoted(self)
 	local fromVocId = vocation:getDemotion():getId()
 	return vocation:getId() ~= fromVocId
 end
+
+function Player.setAccountStorageValue(self, key, value)
+	return Game.setAccountStorageValue(self:getAccountId(), key, value)
+end
+
+function Player.getAccountStorageValue(self, key)
+	return Game.getAccountStorageValue(self:getAccountId(), key)
+end
