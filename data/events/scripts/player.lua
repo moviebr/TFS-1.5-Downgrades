@@ -1,64 +1,73 @@
 function Player:onLook(thing, position, distance)
+	local onLook = EventCallback.onLook
 	local description = ""
-	if EventCallback.onLook then
-		description = EventCallback.onLook(self, thing, position, distance, description)
+	if onLook then
+		description = onLook(self, thing, position, distance, description)
 	end
 	self:sendTextMessage(MESSAGE_INFO_DESCR, description)
 end
 
 function Player:onLookInBattleList(creature, distance)
+	local onLookInBattleList = EventCallback.onLookInBattleList
 	local description = ""
-	if EventCallback.onLookInBattleList then
-		description = EventCallback.onLookInBattleList(self, creature, distance, description)
+	if onLookInBattleList then
+		description = onLookInBattleList(self, creature, distance, description)
 	end
 	self:sendTextMessage(MESSAGE_INFO_DESCR, description)
 end
 
 function Player:onLookInTrade(partner, item, distance)
+	local onLookInTrade = EventCallback.onLookInTrade
 	local description = "You see " .. item:getDescription(distance)
-	if EventCallback.onLookInTrade then
-		description = EventCallback.onLookInTrade(self, partner, item, distance, description)
+	if onLookInTrade then
+		description = onLookInTrade(self, partner, item, distance, description)
 	end
 	self:sendTextMessage(MESSAGE_INFO_DESCR, description)
 end
 
 function Player:onLookInShop(itemType, count, description)
+	local onLookInShop = EventCallback.onLookInShop
 	local description = "You see " .. description
-	if EventCallback.onLookInShop then
-		description = EventCallback.onLookInShop(self, itemType, count, description)
+	if onLookInShop then
+		description = onLookInShop(self, itemType, count, description)
 	end
 	self:sendTextMessage(MESSAGE_INFO_DESCR, description)
 end
 
 function Player:onMoveItem(item, count, fromPosition, toPosition, fromCylinder, toCylinder)
-	if EventCallback.onMoveItem then
-		return EventCallback.onMoveItem(self, item, count, fromPosition, toPosition, fromCylinder, toCylinder)
+	local onMoveItem = EventCallback.onMoveItem
+	if onMoveItem then
+		return onMoveItem(self, item, count, fromPosition, toPosition, fromCylinder, toCylinder)
 	end
 	return true
 end
 
 function Player:onItemMoved(item, count, fromPosition, toPosition, fromCylinder, toCylinder)
-	if EventCallback.onItemMoved then
-		EventCallback.onItemMoved(self, item, count, fromPosition, toPosition, fromCylinder, toCylinder)
+	local onItemMoved = EventCallback.onItemMoved
+	if onItemMoved then
+		onItemMoved(self, item, count, fromPosition, toPosition, fromCylinder, toCylinder)
 	end
 end
 
 function Player:onMoveCreature(creature, fromPosition, toPosition)
-	if EventCallback.onMoveCreature then
-		return EventCallback.onMoveCreature(self, creature, fromPosition, toPosition)
+	local onMoveCreature = EventCallback.onMoveCreature
+	if onMoveCreature then
+		return onMoveCreature(self, creature, fromPosition, toPosition)
 	end
 	return true
 end
 
 function Player:onReportRuleViolation(targetName, reportType, reportReason, comment, translation)
-	if EventCallback.onReportRuleViolation then
-		EventCallback.onReportRuleViolation(self, targetName, reportType, reportReason, comment, translation)
+	local onReportRuleViolation = EventCallback.onReportRuleViolation
+	if onReportRuleViolation then
+		onReportRuleViolation(self, targetName, reportType, reportReason, comment, translation)
 	end
 end
 
 function Player:onReportBug(message, position, category)
-	if EventCallback.onReportBug then
-		return EventCallback.onReportBug(self, message, position, category)
+	local onReportBug = EventCallback.onReportBug
+	if onReportBug then
+		return onReportBug(self, message, position, category)
 	end
 	return true
 end
@@ -71,22 +80,25 @@ function Player:onTurn(direction)
 end
 
 function Player:onTradeRequest(target, item)
-	if EventCallback.onTradeRequest then
-		return EventCallback.onTradeRequest(self, target, item)
+	local onTradeRequest = EventCallback.onTradeRequest
+	if onTradeRequest then
+		return onTradeRequest(self, target, item)
 	end
 	return true
 end
 
 function Player:onTradeAccept(target, item, targetItem)
-	if EventCallback.onTradeAccept then
-		return EventCallback.onTradeAccept(self, target, item, targetItem)
+	local onTradeAccept = EventCallback.onTradeAccept
+	if onTradeAccept then
+		return onTradeAccept(self, target, item, targetItem)
 	end
 	return true
 end
 
 function Player:onTradeCompleted(target, item, targetItem, isSuccess)
-	if EventCallback.onTradeCompleted then
-		EventCallback.onTradeCompleted(self, target, item, targetItem, isSuccess)
+	local onTradeCompleted = EventCallback.onTradeCompleted
+	if onTradeCompleted then
+		onTradeCompleted(self, target, item, targetItem, isSuccess)
 	end
 end
 
@@ -126,6 +138,7 @@ local function useStamina(player)
 end
 
 function Player:onGainExperience(source, exp, rawExp)
+	local onGainExperience = EventCallback.onGainExperience
 	if not source or source:isPlayer() then
 		return exp
 	end
@@ -152,35 +165,39 @@ function Player:onGainExperience(source, exp, rawExp)
 		end
 	end
 
-	return EventCallback.onGainExperience and EventCallback.onGainExperience(self, source, exp, rawExp) or exp
+	return onGainExperience and onGainExperience(self, source, exp, rawExp) or exp
 end
 
 function Player:onLoseExperience(exp)
-	return EventCallback.onLoseExperience and EventCallback.onLoseExperience(self, exp) or exp
+	local onLoseExperience = EventCallback.onLoseExperience
+	return onLoseExperience and onLoseExperience(self, exp) or exp
 end
 
 function Player:onGainSkillTries(skill, tries)
+	local onGainSkillTries = EventCallback.onGainSkillTries
 	if not APPLY_SKILL_MULTIPLIER then
-		return EventCallback.onGainSkillTries and EventCallback.onGainSkillTries(self, skill, tries) or tries
+		return onGainSkillTries and onGainSkillTries(self, skill, tries) or tries
 	end
 
 	if skill == SKILL_MAGLEVEL then
 		tries = tries * configManager.getNumber(configKeys.RATE_MAGIC)
-		return EventCallback.onGainSkillTries and EventCallback.onGainSkillTries(self, skill, tries) or tries
+		return onGainSkillTries and onGainSkillTries(self, skill, tries) or tries
 	end
 	tries = tries * configManager.getNumber(configKeys.RATE_SKILL)
-	return EventCallback.onGainSkillTries and EventCallback.onGainSkillTries(self, skill, tries) or tries
+	return onGainSkillTries and onGainSkillTries(self, skill, tries) or tries
 end
 
 function Player:onInventoryUpdate(item, slot, equip)
-	if EventCallback.onInventoryUpdate then
-		EventCallback.onInventoryUpdate(self, item, slot, equip)
+	local onInventoryUpdate = EventCallback.onInventoryUpdate
+	if onInventoryUpdate then
+		onInventoryUpdate(self, item, slot, equip)
 	end
 end
 
 function Player:onStepTile(fromPosition, toPosition)
-    if EventCallback.onStepTile then
-        return EventCallback.onStepTile(self, fromPosition, toPosition)
+	local onStepTile = EventCallback.onStepTile
+    if onStepTile then
+        return onStepTile(self, fromPosition, toPosition)
     end
     return true
 end
