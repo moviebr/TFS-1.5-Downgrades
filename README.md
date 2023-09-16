@@ -5,7 +5,12 @@ You are welcome to submit a pull request though.
 
 ## How to compile
 
-[Wiki](https://github.com/otland/forgottenserver/wiki/Compiling)
+[Wiki](https://github.com/otland/forgottenserver/wiki/Compiling) (mostly right)
+16-09-23
+Changes necessary to compile on Win10 LTSC (likely to work on any other Win10):
+Change your VS 2022 to C++20 at Solution Project -> Properties then:
+![image](https://github.com/moviebr/TFS-1.5-Downgrades/assets/128563817/e981a32f-28fa-4218-8dd0-d352016f53aa)
+
 
 ## Contributing
 
